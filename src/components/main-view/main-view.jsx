@@ -15,13 +15,17 @@ export class MainView extends React.Component {
     }
   }
 
+
   render() {
+    const movies = this.state.movies;
+
+    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+
     return (
       <div className="main-view">
-        <div>Inception</div>
-        <div>The Shawshank Redemption</div>
-        <div>Gladiator </div>
+        {movies.map(movie => <MovieCard key={movie._id} movieData={movie} />)}
       </div>
-    );
+    )
   }
+
 }

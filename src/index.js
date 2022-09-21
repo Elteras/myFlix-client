@@ -6,26 +6,11 @@ import { MainView } from './components/main-view/main-view';
 import './index.scss';
 
 //Main component (will eventually use all others)
-// class MyFlixApplication extends React.Component {
-//   render() {
-//     return (
-//       <MainView />
-//     );
-//   }
-// }
-
-
 class MyFlixApplication extends React.Component {
   render() {
-    const movies = this.state.movies;
-
-    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
-
     return (
-      <div className="main-view">
-        {movies.map(movie => <MovieCard key={movie._id} movieData={movie} />)}
-      </div>
-    )
+      <MainView />
+    );
   }
 }
 

@@ -2909,36 +2909,11 @@ var _mainView = require("./components/main-view/main-view");
 //Import statement to indicate that we need to bundle (?) './index.scss'
 var _indexScss = require("./index.scss");
 //Main component (will eventually use all others)
-// class MyFlixApplication extends React.Component {
-//   render() {
-//     return (
-//       <MainView />
-//     );
-//   }
-// }
 class MyFlixApplication extends (0, _reactDefault.default).Component {
     render() {
-        const movies = this.state.movies;
-        if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "main-view",
-            children: "The list is empty!"
-        }, void 0, false, {
+        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
             fileName: "src/index.js",
-            lineNumber: 22,
-            columnNumber: 37
-        }, this);
-        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "main-view",
-            children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MovieCard, {
-                    movieData: movie
-                }, movie._id, false, {
-                    fileName: "src/index.js",
-                    lineNumber: 26,
-                    columnNumber: 30
-                }, this))
-        }, void 0, false, {
-            fileName: "src/index.js",
-            lineNumber: 25,
+            lineNumber: 12,
             columnNumber: 7
         }, this);
     }
@@ -27126,34 +27101,27 @@ class MainView extends (0, _reactDefault.default).Component {
         };
     }
     render() {
+        const movies = this.state.movies;
+        if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "main-view",
+            children: "The list is empty!"
+        }, void 0, false, {
+            fileName: "src/components/main-view/main-view.jsx",
+            lineNumber: 22,
+            columnNumber: 37
+        }, this);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "main-view",
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    children: "Inception"
-                }, void 0, false, {
+            children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                    movieData: movie
+                }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 21,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    children: "The Shawshank Redemption"
-                }, void 0, false, {
-                    fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 22,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    children: "Gladiator "
-                }, void 0, false, {
-                    fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 23,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
+                    lineNumber: 26,
+                    columnNumber: 30
+                }, this))
+        }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 20,
+            lineNumber: 25,
             columnNumber: 7
         }, this);
     }
