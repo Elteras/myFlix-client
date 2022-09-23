@@ -3,7 +3,7 @@ import React from 'react';
 export class MovieView extends React.Component {
 
   render() {
-    const { movieData } = this.props;
+    const { movieData, onBackClick } = this.props;
 
     return (
       <div className="movie-view">

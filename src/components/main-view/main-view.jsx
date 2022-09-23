@@ -29,7 +29,7 @@ export class MainView extends React.Component {
 
     return (
       <div className="main-view">
-        {selectedMovie
+        {selectedMovie            //here using ternary operator
           ? <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
           : movies.map(movie => (
             <MovieCard key={movie._id} movieData={movie} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
