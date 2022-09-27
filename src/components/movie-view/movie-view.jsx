@@ -2,7 +2,21 @@ import React from 'react';
 
 export class MovieView extends React.Component {
 
-  //
+  // REMOVE ALL OF THIS
+  // keypressCallback(event) {
+  //   console.log(event.key);
+  // }
+
+  // componentDidMount() {
+  //   document.addEventListener('keypress', this.keypressCallback);
+  // }
+
+  // componentWillUnmount() {
+  //   document.removeEventListener('keypress', this.keypressCallback);
+  // }
+
+
+
   render() {
     const { movieData, onBackClick } = this.props;
 
