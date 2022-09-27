@@ -34,3 +34,8 @@ export function Registration(props) {
     </form>
   )
 }
+
+//Need to do a registration view thing, not sure if the below is correct. 
+RegistrationView.propTypes = {
+  onRegistration: PropTypes.func.isRequired,
+};
