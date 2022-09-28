@@ -27,3 +27,7 @@ export function LoginView(props) {
     </form>
   );
 }
+
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
+};

@@ -1,20 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class MovieView extends React.Component {
-
-  // REMOVE ALL OF THIS
-  // keypressCallback(event) {
-  //   console.log(event.key);
-  // }
-
-  // componentDidMount() {
-  //   document.addEventListener('keypress', this.keypressCallback);
-  // }
-
-  // componentWillUnmount() {
-  //   document.removeEventListener('keypress', this.keypressCallback);
-  // }
-
 
 
   render() {
@@ -38,3 +25,17 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+
+
+MovieViw.propTypes = {
+  movieData: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired
+}
+
+
+

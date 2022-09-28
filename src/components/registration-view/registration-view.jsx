@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export function Registration(props) {
+export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ export function Registration(props) {
 
     /* Send a request to the server for authentication */
     /* then call props.Registration(username) */
-    props.Registration(username);
+    props.onRegistration(username);
   };
 
   return (

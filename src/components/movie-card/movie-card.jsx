@@ -12,7 +12,7 @@ export class MovieCard extends React.Component {
 
 //Apparently should add proptypes for all components?
 MovieCard.propTypes = {
-  movie: PropTypes.shape({
+  movieData: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired
