@@ -11,9 +11,6 @@ export class MovieCard extends React.Component {
   render() {
     const { movieData, onMovieClick } = this.props;
 
-
-    // return <div className="movie-card" onClick={() => { onMovieClick(movieData); }} >{movieData.Title}</div>;
-
     return (
       <Card>
         <Card.Img variant="top" src={movieData.ImagePath} />
@@ -28,8 +25,6 @@ export class MovieCard extends React.Component {
   }
 }
 
-
-//Apparently should add proptypes for all components?
 MovieCard.propTypes = {
   movieData: PropTypes.shape({
     Title: PropTypes.string.isRequired,
