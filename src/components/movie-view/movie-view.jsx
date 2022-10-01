@@ -14,55 +14,30 @@ export class MovieView extends React.Component {
 
 
     //----- everything below this line is the new modal stuff that i might just completely scrap
-    const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    if (!movieData) return <></>;
 
 
     return (                    //Unsure of a lot of the formatting, forgotten some of the HTML basics. Will work on it. 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={movieData} onHide={() => { onBackClick(null) }}>
 
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>{movieData.Title}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <p>{movieData.Description}</p>
-          <div>{movieData.Director}</div>
-          <div>{movieData.Genre}</div>
-          <div><img>{movieData.ImagePath}</img></div>
+          <div>{movieData.Director.Name}</div>
+          <div>{movieData.Genre.Name}</div>
+          <div><img src={movieData.ImagePath} /></div>
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="success" onClick={() => { onBackClick(null); }}>
-            Back
-          </Button>
+          <Button variant="success" onClick={() => { onBackClick(null); }}>Back</Button>
         </Modal.Footer>
 
       </Modal>
     )
-
-
-
-    // return (
-    //   <div className="movie-view">
-    //     <div className="movie-poster">
-    //       <img src={movieData.ImagePath} />
-    //     </div>
-    //     <div className="movie-title">
-    //       <span className="label">Title: </span>
-    //       <span className="value">{movieData.Title} </span>
-    //     </div>
-    //     <div className="movie-description">
-    //       <span className="label">Description: </span>
-    //       <span className="value">{movieData.Description} </span>
-    //     </div>
-    //     <button onClick={() => { onBackClick(null); }}>Back</button>
-    //   </div>
-    // );
-
-
 
   }
 }

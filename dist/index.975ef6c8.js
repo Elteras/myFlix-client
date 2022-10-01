@@ -27076,10 +27076,7 @@ $parcel$ReactRefreshHelpers$f7a6.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MainView", ()=>MainView) // { _id: 1, Title: 'Inception', Description: 'desc1...', ImagePath: 'https://picsum.photos/seed/1/200/300' },
- // { _id: 2, Title: 'The Shawshank Redemption', Description: 'desc2...', ImagePath: 'https://picsum.photos/seed/2/200/300' },
- // { _id: 3, Title: 'Gladiator', Description: 'desc3...', ImagePath: 'https://picsum.photos/seed/3/200/300' }
-;
+parcelHelpers.export(exports, "MainView", ()=>MainView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -27141,41 +27138,36 @@ class MainView extends (0, _reactDefault.default).Component {
         }, this);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
             className: "main-view justify-content-md-center",
-            children: selectedMovie //here using ternary operator
-             ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                md: 8,
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+            children: [
+                movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                        md: 3,
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                            movieData: movie,
+                            onMovieClick: (movie)=>{
+                                this.setSelectedMovie(movie);
+                            }
+                        }, movie._id, false, {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 66,
+                            columnNumber: 13
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 65,
+                        columnNumber: 11
+                    }, this)),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                     movieData: selectedMovie,
                     onBackClick: (newSelectedMovie)=>{
                         this.setSelectedMovie(newSelectedMovie);
                     }
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 66,
-                    columnNumber: 15
+                    lineNumber: 69,
+                    columnNumber: 9
                 }, this)
-            }, void 0, false, {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 65,
-                columnNumber: 13
-            }, this) : movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                    md: 3,
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                        movieData: movie,
-                        onMovieClick: (movie)=>{
-                            this.setSelectedMovie(movie);
-                        }
-                    }, movie._id, false, {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 72,
-                        columnNumber: 17
-                    }, this)
-                }, void 0, false, {
-                    fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 71,
-                    columnNumber: 15
-                }, this))
-        }, void 0, false, {
+            ]
+        }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 62,
             columnNumber: 7
@@ -29451,25 +29443,24 @@ class MovieView extends (0, _reactDefault.default).Component {
     render() {
         const { movieData , onBackClick  } = this.props;
         //----- everything below this line is the new modal stuff that i might just completely scrap
-        const [show, setShow] = (0, _react.useState)(false);
-        const handleClose = ()=>setShow(false);
-        const handleShow = ()=>setShow(true);
+        if (!movieData) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {}, void 0, false);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default), {
-            show: show,
-            onHide: handleClose,
+            show: movieData,
+            onHide: ()=>{
+                onBackClick(null);
+            },
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Header, {
-                    closeButton: true,
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Title, {
                         children: movieData.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 27,
+                        lineNumber: 25,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 26,
+                    lineNumber: 24,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Body, {
@@ -29478,40 +29469,40 @@ class MovieView extends (0, _reactDefault.default).Component {
                             children: movieData.Description
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 29,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            children: movieData.Director.Name
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 30,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            children: movieData.Genre.Name
+                        }, void 0, false, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 31,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            children: movieData.Director
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 32,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            children: movieData.Genre
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 33,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                                children: movieData.ImagePath
+                                src: movieData.ImagePath
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 34,
+                                lineNumber: 32,
                                 columnNumber: 16
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 34,
+                            lineNumber: 32,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 30,
+                    lineNumber: 28,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Footer, {
@@ -29523,36 +29514,20 @@ class MovieView extends (0, _reactDefault.default).Component {
                         children: "Back"
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 38,
+                        lineNumber: 36,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 37,
+                    lineNumber: 35,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/movie-view/movie-view.jsx",
-            lineNumber: 24,
+            lineNumber: 22,
             columnNumber: 7
         }, this);
-    // return (
-    //   <div className="movie-view">
-    //     <div className="movie-poster">
-    //       <img src={movieData.ImagePath} />
-    //     </div>
-    //     <div className="movie-title">
-    //       <span className="label">Title: </span>
-    //       <span className="value">{movieData.Title} </span>
-    //     </div>
-    //     <div className="movie-description">
-    //       <span className="label">Description: </span>
-    //       <span className="value">{movieData.Description} </span>
-    //     </div>
-    //     <button onClick={() => { onBackClick(null); }}>Back</button>
-    //   </div>
-    // );
     }
 }
 MovieView.propTypes = {

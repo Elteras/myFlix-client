@@ -60,7 +60,15 @@ export class MainView extends React.Component {
 
     return (
       <Row className="main-view justify-content-md-center">
-        {selectedMovie            //here using ternary operator
+
+        {movies.map(movie => (
+          <Col md={3}>
+            <MovieCard key={movie._id} movieData={movie} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
+          </Col>
+        ))}
+        <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+
+        {/* {selectedMovie            //here using ternary operator
           ? (
             <Col md={8}>
               <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
@@ -73,7 +81,9 @@ export class MainView extends React.Component {
               </Col>
             ))
           )
-        }
+        } */}
+
+
       </Row>
     );
   }
@@ -87,11 +97,3 @@ export class MainView extends React.Component {
 
 }
 
-
-
-
-
-
-// { _id: 1, Title: 'Inception', Description: 'desc1...', ImagePath: 'https://picsum.photos/seed/1/200/300' },
-// { _id: 2, Title: 'The Shawshank Redemption', Description: 'desc2...', ImagePath: 'https://picsum.photos/seed/2/200/300' },
-// { _id: 3, Title: 'Gladiator', Description: 'desc3...', ImagePath: 'https://picsum.photos/seed/3/200/300' }
