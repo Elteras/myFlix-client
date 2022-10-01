@@ -2,14 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MainView } from './components/main-view/main-view';
 
-//Import statement to indicate that we need to bundle (?) './index.scss'
+import Container from 'react-bootstrap/Container';
+
 import './index.scss';
 
 //Main component (will eventually use all others)
 class MyFlixApplication extends React.Component {
   render() {
     return (
-      <MainView />
+      <Container>
+        <MainView />
+      </Container>
     );
   }
 }
