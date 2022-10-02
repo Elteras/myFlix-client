@@ -8,6 +8,8 @@ import { MovieView } from '../movie-view/movie-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import './main-view.scss';
+
 export class MainView extends React.Component {
 
   constructor() {
@@ -54,7 +56,13 @@ export class MainView extends React.Component {
 
 
     /* If there's no user, LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return (
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+        </Col>
+      </Row>
+    );
 
     if (movies.length === 0) return <div className="main-view"></div>;
 
@@ -62,7 +70,7 @@ export class MainView extends React.Component {
       <Row className="main-view justify-content-md-center">
 
         {movies.map(movie => (
-          <Col md={3}>
+          <Col className="movie-card-col" md={3}>
             <MovieCard key={movie._id} movieData={movie} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
           </Col>
         ))}

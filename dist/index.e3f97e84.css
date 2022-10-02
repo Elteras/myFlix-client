@@ -2,10 +2,19 @@
   margin-top: 30px;
 }
 
+.movie-cards {
+  height: 100%;
+}
+
 
 
 .loginButton {
-  margin-top: 10px;
+  margin-top: 15px;
+}
+
+.movie-card-col {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .my-flix {
