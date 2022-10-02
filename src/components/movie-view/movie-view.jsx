@@ -12,13 +12,10 @@ export class MovieView extends React.Component {
   render() {
     const { movieData, onBackClick } = this.props;
 
-
-    //----- everything below this line is the new modal stuff that i might just completely scrap
-
     if (!movieData) return <></>;
 
 
-    return (                    //Unsure of a lot of the formatting, forgotten some of the HTML basics. Will work on it. 
+    return (
       <Modal show={movieData} onHide={() => { onBackClick(null) }}>
 
         <Modal.Header>
