@@ -1,8 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 
+import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import './main-view.scss';
 
 export class MainView extends React.Component {
 
@@ -10,8 +16,9 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null
-    }
+      selectedMovie: null,
+      user: null
+    };
   }
 
 
@@ -27,6 +34,9 @@ export class MainView extends React.Component {
       });
   }
 
+  componentWillUnmount() {
+    //
+  }
 
 
   setSelectedMovie(newSelectedMovie) {
@@ -35,29 +45,47 @@ export class MainView extends React.Component {
     });
   }
 
-  render() {
-    const { movies, selectedMovie } = this.state;
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
 
-    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+  render() {
+    const { movies, selectedMovie, user } = this.state;
+
+
+    /* If there's no user, LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
+    if (!user) return (
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+        </Col>
+      </Row>
+    );
+
+    if (movies.length === 0) return <div className="main-view"></div>;
 
     return (
-      <div className="main-view">
-        {selectedMovie            //here using ternary operator
-          ? <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-          : movies.map(movie => (
+      <Row className="main-view justify-content-md-center">
+
+        {movies.map(movie => (
+          <Col className="movie-card-col" md={3}>
             <MovieCard key={movie._id} movieData={movie} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
-          ))
-        }
-      </div>
+          </Col>
+        ))}
+        <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+
+      </Row>
     );
   }
+
+
+
+
+
+
+
+
 }
 
-
-
-
-
-
-// { _id: 1, Title: 'Inception', Description: 'desc1...', ImagePath: 'https://picsum.photos/seed/1/200/300' },
-// { _id: 2, Title: 'The Shawshank Redemption', Description: 'desc2...', ImagePath: 'https://picsum.photos/seed/2/200/300' },
-// { _id: 3, Title: 'Gladiator', Description: 'desc3...', ImagePath: 'https://picsum.photos/seed/3/200/300' }
