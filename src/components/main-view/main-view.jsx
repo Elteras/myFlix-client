@@ -22,22 +22,42 @@ export class MainView extends React.Component {
   }
 
 
+  // componentDidMount() {
+  //   axios.get('https://elt-myflix.herokuapp.com/movies')
+  //     .then(response => {
+  //       this.setState({
+  //         movies: response.data
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }
+
   componentDidMount() {
-    axios.get('https://elt-myflix.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       });
+      this.getMovies(accessToken);
+    }
   }
 
   componentWillUnmount() {
     //
   }
 
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
 
   setSelectedMovie(newSelectedMovie) {
     this.setState({
@@ -45,10 +65,19 @@ export class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(user) {
-    this.setState({
-      user
-    });
+  getMovies(token) {
+    axios.get('https://elt-myflix.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        //Assign result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
