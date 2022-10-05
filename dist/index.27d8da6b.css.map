@@ -1,1 +1,0 @@
-{"mappings":"AAAA;;;;ACEA","sources":["src/components/login-view/login-view.scss","src/index.scss"],"sourcesContent":[".loginButton {\r\n  margin-top: 10px;\r\n}","$color: steelblue;\r\n\r\n.my-flix {\r\n  color: $color;\r\n}"],"names":[],"version":3,"file":"index.27d8da6b.css.map","sourceRoot":"/__parcel_source_root/"}
