@@ -22,18 +22,6 @@ export class MainView extends React.Component {
   }
 
 
-  // componentDidMount() {
-  //   axios.get('https://elt-myflix.herokuapp.com/movies')
-  //     .then(response => {
-  //       this.setState({
-  //         movies: response.data
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
-
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
