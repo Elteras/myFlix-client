@@ -7,6 +7,8 @@ import { MovieView } from '../movie-view/movie-view';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
 
 import './main-view.scss';
 
@@ -46,6 +48,15 @@ export class MainView extends React.Component {
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
   }
+
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
+
 
   setSelectedMovie(newSelectedMovie) {
     this.setState({
@@ -93,6 +104,13 @@ export class MainView extends React.Component {
         ))}
         <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
 
+        <Container>
+          <Row>
+            <Col className="text-center">
+              <Button className="logoutButton" variant="success" onClick={() => { this.onLoggedOut() }}>Log out</Button>
+            </Col>
+          </Row>
+        </Container>
       </Row>
     );
   }
