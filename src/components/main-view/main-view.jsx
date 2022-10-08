@@ -93,7 +93,6 @@ export class MainView extends React.Component {
     );
 
     if (movies.length === 0) return <div className="main-view"></div>;
-
     return (
       <Row className="main-view justify-content-md-center">
 
