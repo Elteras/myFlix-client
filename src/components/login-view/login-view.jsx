@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 // import Button from 'react-bootstrap/Button';
 import { Button, Form } from 'react-bootstrap';
 
 import './login-view.scss';
+
+
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -74,9 +79,12 @@ export function LoginView(props) {
         Submit
       </Button>
 
-      <Button className="registrationButton" variant="success">
-        Register
-      </Button>
+      <Link to={`/register`}>
+        <Button className="registrationButton" variant="success">
+          Register
+        </Button>
+      </Link>
+
     </Form>
   )
 

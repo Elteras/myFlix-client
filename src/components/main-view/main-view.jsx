@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -82,7 +84,6 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user } = this.state;
 
-
     /* If there's no user, LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user) return (
       <Row>
@@ -94,23 +95,30 @@ export class MainView extends React.Component {
 
     if (movies.length === 0) return <div className="main-view"></div>;
     return (
-      <Row className="main-view justify-content-md-center">
+      <Router>
+        <Row className="main-view justify-content-md-center">
+          <Route exact path="/" render={() => {
 
-        {movies.map(movie => (
-          <Col className="movie-card-col" md={3}>
-            <MovieCard key={movie._id} movieData={movie} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
-          </Col>
-        ))}
-        <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+            {
+              return movies.map(m => (
+                <Col className="movie-card-col" md={3} key={m._id}>
+                  <MovieCard movieData={m} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
+                </Col>
+              ))
+            }
+          }} />
 
-        <Container>
-          <Row>
-            <Col className="text-center">
-              <Button className="logoutButton" variant="success" onClick={() => { this.onLoggedOut() }}>Log out</Button>
-            </Col>
-          </Row>
-        </Container>
-      </Row>
+          <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+
+          <Container>
+            <Row>
+              <Col className="text-center">
+                <Button className="logoutButton" variant="success" onClick={() => { this.onLoggedOut() }}>Log out</Button>
+              </Col>
+            </Row>
+          </Container>
+        </Row>
+      </Router>
     );
   }
 

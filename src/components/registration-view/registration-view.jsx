@@ -74,39 +74,42 @@ export function RegistrationView(props) {
     };
   }
 
+  //note, havent put in the className="reg-form-inputs" yet
   return (
+    <Router>
+      <Route path="/register" render { () => {
 
-    //note, havent put in the className="reg-form-inputs" yet
+        return <Form>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
+            {usernameErr && <p>{usernameErr}</p>}
+          </Form.Group>
 
-    <Form>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        {usernameErr && <p>{usernameErr}</p>}
-      </Form.Group>
+          <Form.Group controlId="formName">
+            <Form.Label>Name:</Form.Label>
+            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
+            {nameErr && <p>{nameErr}</p>}
+          </Form.Group>
 
-      <Form.Group controlId="formName">
-        <Form.Label>Name:</Form.Label>
-        <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
-        {nameErr && <p>{nameErr}</p>}
-      </Form.Group>
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+            {passwordErr && <p>{passwordErr}</p>}
+          </Form.Group>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        {passwordErr && <p>{passwordErr}</p>}
-      </Form.Group>
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control type="email" value={email} onChange={e => setPassword(e.target.value)} />
+            {emailErr && <p>{emailErr}</p>}
+          </Form.Group>
 
-      <Form.Group controlId="formEmail">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control type="email" value={email} onChange={e => setPassword(e.target.value)} />
-        {emailErr && <p>{emailErr}</p>}
-      </Form.Group>
-
-      <Button className="registrationButton" variant="success" type="submit" onClick={handleSubmit}>
-        Register
-      </Button>
-    </Form>
+          <Button className="registrationButton" variant="success" type="submit" onClick={handleSubmit}>
+            Register
+          </Button>
+        </Form>
+      }} />
+    </Router>
   )
 
 
