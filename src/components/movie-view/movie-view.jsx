@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+import { Link } from "react-router-dom";
+
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
@@ -24,9 +26,18 @@ export class MovieView extends React.Component {
 
         <Modal.Body>
           <p>{movieData.Description}</p>
-          <div>{movieData.Director.Name}</div>
-          <div>{movieData.Genre.Name}</div>
-          <div><img src={movieData.ImagePath} /></div>
+
+          <div class="links">
+            <Link to={`/directors/${movieData.Director.Name}`}>
+              <Button variant="link" className="director-button">{movieData.Director.Name}</Button>
+            </Link>
+
+            <Link to={`/genres/${movieData.Genre.Name}`}>
+              <Button variant="link">{movieData.Genre.Name}</Button>
+            </Link>
+          </div>
+
+          <div class="movie-poster"><img src={movieData.ImagePath} /></div>
         </Modal.Body>
 
         <Modal.Footer>
