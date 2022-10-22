@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -9,6 +10,25 @@ import { Link } from "react-router-dom";
 import './movie-view.scss';
 
 export class MovieView extends React.Component {
+
+  addFaveMovie(e) {
+    const { movieData } = this.props;
+    const username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    e.preventDefault();
+    axios
+      .post(
+        `https://elt-myflix.herokuapp.com/users/${username}/movies/${movieData._id}`,
+        { username: localStorage.getItem("user") },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("Movie added");
+      })
+      .catch((error) => console.error(error));
+  }
 
 
   render() {
@@ -41,6 +61,7 @@ export class MovieView extends React.Component {
         </Modal.Body>
 
         <Modal.Footer>
+          <Button variant="success" onClick={(e) => this.addFaveMovie(e)}> Add to Favorites </Button>
           <Button variant="success" onClick={() => { onBackClick(null); }}>Back</Button>
         </Modal.Footer>
 
@@ -50,7 +71,7 @@ export class MovieView extends React.Component {
   }
 }
 
-
+//cant remember why i commented this all out
 
 // MovieView.propTypes = {
 //   movieData: PropTypes.shape({

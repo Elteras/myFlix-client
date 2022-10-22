@@ -26,7 +26,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       selectedMovie: null,
-      user: localStorage.getItem('user')
+      user: JSON.parse(localStorage.getItem('user'))
     };
   }
 
@@ -34,9 +34,6 @@ export class MainView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
       this.getMovies(accessToken);
     }
   }
@@ -48,11 +45,11 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user: authData.user.Username
+      user: authData.user
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem('user', JSON.stringify(authData.user));
     this.getMovies(authData.token);
   }
 
@@ -112,10 +109,14 @@ export class MainView extends React.Component {
                 return <>
                   {movies.map(m => (
                     <Col className="movie-card-col" md={3} key={m._id}>
-                      <MovieCard movieData={m} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
+                      <MovieCard
+                        movieData={m}
+                        onMovieClick={movie => { this.setSelectedMovie(movie) }} />
                     </Col>
                   ))}
-                  <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+                  <MovieView
+                    movieData={selectedMovie}
+                    onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
                 </>
               }
             }} />
@@ -142,6 +143,7 @@ export class MainView extends React.Component {
               return <Col md={8}>
                 <UserView
                   user={user}
+                  movies={movies}
                   onBackClick={() => history.goBack()} />
               </Col>
             }} />
@@ -175,9 +177,13 @@ export class MainView extends React.Component {
                 </Col>
               );
 
+              if (movies.length === 0) return <div>Loading...</div>
+
               return <Col md={8}>
-                <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}
-                  onBackClick={() => history.goBack()} />
+                <GenreView
+                  genre={movies.find(m => m.Genre.Name === match.params.name).Genre}
+                  onBackClick={() => history.goBack()}
+                  moviesInGenre={movies.filter(m => m.Genre.Name === match.params.name)} />
               </Col>
             }} />
 

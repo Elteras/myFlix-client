@@ -11,12 +11,19 @@ import './genre-view.scss';
 
 export class GenreView extends React.Component {
   render() {
-    const { genre, onBackClick } = this.props;
+    const { genre, moviesInGenre, onBackClick } = this.props;
 
     return (
       <div>
         <h3>{genre.Name}</h3>
         <p>Description: {genre.Description}</p>
+
+        <p> Movies in the {genre.Name} genre:</p>
+        <ul>
+          {moviesInGenre?.map(m => (
+            <div>{m.Title}</div>
+          ))}
+        </ul>
       </div>
 
     )

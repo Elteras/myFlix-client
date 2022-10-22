@@ -25,7 +25,7 @@ export class DirectorView extends React.Component {
 
         <ul>
           {moviesDirected?.map(m => (
-            m.Title
+            <div>{m.Title}</div>
           ))}
         </ul>
 
