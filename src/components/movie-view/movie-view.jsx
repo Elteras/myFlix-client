@@ -61,6 +61,8 @@ export class MovieView extends React.Component {
 
     if (!movieData) return <></>;
 
+    console.log(movieData);
+
 
     return (
       <Modal show={movieData} onHide={() => { onBackClick(null) }}>
