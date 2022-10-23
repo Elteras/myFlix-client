@@ -24,10 +24,35 @@ export class MovieView extends React.Component {
       )
       .then((response) => {
         console.log(response);
-        setUser(user);
+        setUser(response.data);
         alert("Movie added");
       })
       .catch((error) => console.error(error));
+  }
+
+  removeFaveMovie(e) {
+    const { movieData, movieFaved, setUser } = this.props;
+    const username = JSON.parse(localStorage.getItem("user")).Username;
+    const token = localStorage.getItem("token");
+
+    if (movieFaved) {
+      alert("You don't have that favorited yet!")
+    } else {
+
+      e.preventDefault();
+      axios
+        .delete(
+          `https://elt-myflix.herokuapp.com/users/${username}/movies/${movieData._id}`,
+          {}, { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then((response) => {
+          console.log(response);
+          setUser(response.data);
+          alert("Movie removed");
+        })
+        .catch((error) => console.error(error));
+
+    }
   }
 
 
@@ -62,6 +87,7 @@ export class MovieView extends React.Component {
 
         <Modal.Footer>
           <Button variant="success" onClick={(e) => this.addFaveMovie(e)}> Add to Favorites </Button>
+          <Button variant="success" onClick={(e) => this.removeFaveMovie(e)}> Remove from Favorites </Button>
           <Button variant="success" onClick={() => { onBackClick(null); }}>Back</Button>
         </Modal.Footer>
 
