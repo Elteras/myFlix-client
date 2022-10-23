@@ -132,6 +132,7 @@ export class MainView extends React.Component {
 
             {/* For each of these paths will need the statement to check if theres a user, and render loginview if there isnt */}
 
+
             <Route path="/profile/:user" render={({ history }) => {
 
               if (!user) return (
@@ -139,6 +140,8 @@ export class MainView extends React.Component {
                   <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                 </Col>
               );
+
+              if (movies.length === 0) return <div>Loading...</div>
 
               return <Col md={8}>
                 <UserView

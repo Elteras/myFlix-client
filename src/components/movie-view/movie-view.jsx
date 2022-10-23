@@ -20,8 +20,7 @@ export class MovieView extends React.Component {
     axios
       .post(
         `https://elt-myflix.herokuapp.com/users/${username}/movies/${movieData._id}`,
-        { username: localStorage.getItem("user") },
-        { headers: { Authorization: `Bearer ${token}` } }
+        {}, { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
         console.log(response);

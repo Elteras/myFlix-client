@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import { Button, Card, Container } from 'react-bootstrap';
+import { Button, Card, Form, Container } from 'react-bootstrap';
 
 import { Link } from "react-router-dom";
 
@@ -11,53 +11,11 @@ import './user-view.scss';
 
 export class UserView extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
-      FavouriteMovies: [],
-    };
-  }
-
-  componentDidMount() {
-    this.getUser();
-  }
-
-  getUser = () => {
-    const username = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
-    axios.get(`https://elt-myflix.herokuapp.com/users/${username}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((response) => {
-        this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavouriteMovies: response.data.FavouriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-
-
-
-
-
-
 
   render() {
     const { user, movies, onBackClick } = this.props;
-    const { FavouriteMovies, Email, Birthday } = this.state;
 
-    const userFaves = FavouriteMovies.map((movieId) =>
+    const userFaves = user.FavoriteMovies?.map((movieId) =>
       movies.find((movie) => movie._id === movieId)
     );
 
@@ -72,12 +30,48 @@ export class UserView extends React.Component {
           <p>Favorite Movies:</p>
 
           <ul>
-            {userFaves.map((fm) => (
-              <div>{fm.Title}</div>
+            {userFaves?.map((fm) => (
+              <li>{fm.Title}</li>
             ))}
           </ul>
 
         </div>
+
+
+        {/* <Card>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
+              {usernameErr && <p>{usernameErr}</p>}
+            </Form.Group>
+
+            <Form.Group controlId="formName">
+              <Form.Label>Name:</Form.Label>
+              <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
+              {nameErr && <p>{nameErr}</p>}
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+              {passwordErr && <p>{passwordErr}</p>}
+            </Form.Group>
+
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="text" value={email} onChange={e => setPassword(e.target.value)} />
+              {emailErr && <p>{emailErr}</p>}
+            </Form.Group>
+
+            <Button className="registrationButton" variant="success" type="submit" onClick={handleSubmit}>
+              Update
+            </Button>
+          </Form>
+        </Card> */}
+
+
+
       </>
 
     )
