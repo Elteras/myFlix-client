@@ -68,6 +68,11 @@ export class MainView extends React.Component {
     });
   }
 
+  setUser(user) {
+    this.setState({ user: user });
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
   getMovies(token) {
     axios.get('https://elt-myflix.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
@@ -116,6 +121,7 @@ export class MainView extends React.Component {
                   ))}
                   <MovieView
                     movieData={selectedMovie}
+                    setUser={this.setUser(user)}
                     onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
                 </>
               }

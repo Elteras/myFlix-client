@@ -12,8 +12,8 @@ import './movie-view.scss';
 export class MovieView extends React.Component {
 
   addFaveMovie(e) {
-    const { movieData } = this.props;
-    const username = localStorage.getItem("user");
+    const { movieData, setUser } = this.props;
+    const username = JSON.parse(localStorage.getItem("user")).Username;
     const token = localStorage.getItem("token");
 
     e.preventDefault();
@@ -24,6 +24,7 @@ export class MovieView extends React.Component {
       )
       .then((response) => {
         console.log(response);
+        setUser(user);
         alert("Movie added");
       })
       .catch((error) => console.error(error));
