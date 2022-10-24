@@ -46,35 +46,54 @@ export function UserView(user, movies, onBackClick) {
     };
   }
 
-  <Card>
-    <h3>Update information</h3>
-    <Form>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </Form.Group>
+  return (
+    <>
+      <div>
+        <p>Name: {user.Username}</p>
+        <p>Email: {user.Email}</p>
+        <p>Birthday: {user.Birthday}</p>
+      </div>
+      <div>
+        <p>Favorite Movies:</p>
 
-      <Form.Group controlId="formName">
-        <Form.Label>Name:</Form.Label>
-        <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
-      </Form.Group>
+        <ul>
+          {userFaves?.map((fm) => (
+            <li>{fm.Title}</li>
+          ))}
+        </ul>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </Form.Group>
-
-      <Form.Group controlId="formEmail">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control type="text" value={email} onChange={e => setPassword(e.target.value)} />
-      </Form.Group>
-
-      <Button className="registrationButton" variant="success" type="submit" onClick={handleSubmit}>
-        Update
-      </Button>
-    </Form>
-  </Card>
+      </div>
 
 
+      <Card>
+        <h3>Update information</h3>
+        <Form>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="formName">
+            <Form.Label>Name:</Form.Label>
+            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control type="text" value={email} onChange={e => setPassword(e.target.value)} />
+          </Form.Group>
+
+          <Button className="registrationButton" variant="success" type="submit" onClick={handleSubmit}>
+            Update
+          </Button>
+        </Form>
+      </Card>
+    </>
+  )
 
 }
