@@ -11,6 +11,11 @@ import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
+  isFaved(movie) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user.FavoriteMovies.includes(movie._id);
+  }
+
   addFaveMovie(e) {
     const { movieData, setUser } = this.props;
     const username = JSON.parse(localStorage.getItem("user")).Username;
@@ -31,28 +36,22 @@ export class MovieView extends React.Component {
   }
 
   removeFaveMovie(e) {
-    const { movieData, movieFaved, setUser } = this.props;
+    const { movieData, setUser } = this.props;
     const username = JSON.parse(localStorage.getItem("user")).Username;
     const token = localStorage.getItem("token");
 
-    if (movieFaved) {
-      alert("You don't have that favorited yet!")
-    } else {
-
-      e.preventDefault();
-      axios
-        .delete(
-          `https://elt-myflix.herokuapp.com/users/${username}/movies/${movieData._id}`,
-          {}, { headers: { Authorization: `Bearer ${token}` } }
-        )
-        .then((response) => {
-          console.log(response);
-          setUser(response.data);
-          alert("Movie removed");
-        })
-        .catch((error) => console.error(error));
-
-    }
+    e.preventDefault();
+    axios
+      .delete(
+        `https://elt-myflix.herokuapp.com/users/${username}/movies/${movieData._id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        console.log(response);
+        setUser(response.data);
+        alert("Movie removed");
+      })
+      .catch((error) => console.error(error));
   }
 
 
@@ -87,10 +86,23 @@ export class MovieView extends React.Component {
           <div class="movie-poster"><img src={movieData.ImagePath} /></div>
         </Modal.Body>
 
+
         <Modal.Footer>
-          <Button variant="success" onClick={(e) => this.addFaveMovie(e)}> Add to Favorites </Button>
-          <Button variant="success" onClick={(e) => this.removeFaveMovie(e)}> Remove from Favorites </Button>
-          <Button variant="success" onClick={() => { onBackClick(null); }}>Back</Button>
+          {!this.isFaved(movieData) ? (
+            <Button variant="success" onClick={(e) => this.addFaveMovie(e)}>
+              {" "}
+              Add to Favorites{" "}
+            </Button>
+          ) : (
+            <Button variant="success" onClick={(e) => this.removeFaveMovie(e)}>
+              {" "}
+              Remove from Favorites{" "}
+            </Button>
+          )}
+          <Button variant="success" onClick={() => { onBackClick(null); }}
+          >
+            Back
+          </Button>
         </Modal.Footer>
 
       </Modal>

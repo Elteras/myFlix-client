@@ -122,7 +122,6 @@ export class MainView extends React.Component {
                   <MovieView
                     movieData={selectedMovie}
                     setUser={(user) => { this.setUser(user) }}
-                    movieFaved={(user.FavoriteMovies).find(m => m.Title === selectedMovie?.Title)}
                     onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
                 </>
               }

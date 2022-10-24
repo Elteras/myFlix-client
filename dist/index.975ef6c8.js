@@ -5780,7 +5780,6 @@ class MainView extends (0, _reactDefault.default).Component {
                                                 setUser: (user)=>{
                                                     this.setUser(user);
                                                 },
-                                                movieFaved: user.FavoriteMovies.find((m)=>m.Title === selectedMovie?.Title),
                                                 onBackClick: (newSelectedMovie)=>{
                                                     this.setSelectedMovie(newSelectedMovie);
                                                 }
@@ -5805,7 +5804,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 132,
+                                lineNumber: 131,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -5835,7 +5834,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 143,
+                                lineNumber: 142,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -5865,7 +5864,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 162,
+                                lineNumber: 161,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -5895,7 +5894,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 182,
+                                lineNumber: 181,
                                 columnNumber: 13
                             }, this)
                         ]
@@ -10465,6 +10464,10 @@ var _modalDefault = parcelHelpers.interopDefault(_modal);
 var _reactRouterDom = require("react-router-dom");
 var _movieViewScss = require("./movie-view.scss");
 class MovieView extends (0, _reactDefault.default).Component {
+    isFaved(movie) {
+        const user = JSON.parse(localStorage.getItem("user"));
+        return user.FavoriteMovies.includes(movie._id);
+    }
     addFaveMovie(e) {
         const { movieData , setUser  } = this.props;
         const username = JSON.parse(localStorage.getItem("user")).Username;
@@ -10481,22 +10484,19 @@ class MovieView extends (0, _reactDefault.default).Component {
         }).catch((error)=>console.error(error));
     }
     removeFaveMovie(e) {
-        const { movieData , movieFaved , setUser  } = this.props;
+        const { movieData , setUser  } = this.props;
         const username = JSON.parse(localStorage.getItem("user")).Username;
         const token = localStorage.getItem("token");
-        if (movieFaved) alert("You don't have that favorited yet!");
-        else {
-            e.preventDefault();
-            (0, _axiosDefault.default).delete(`https://elt-myflix.herokuapp.com/users/${username}/movies/${movieData._id}`, {}, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then((response)=>{
-                console.log(response);
-                setUser(response.data);
-                alert("Movie removed");
-            }).catch((error)=>console.error(error));
-        }
+        e.preventDefault();
+        (0, _axiosDefault.default).delete(`https://elt-myflix.herokuapp.com/users/${username}/movies/${movieData._id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            console.log(response);
+            setUser(response.data);
+            alert("Movie removed");
+        }).catch((error)=>console.error(error));
     }
     render() {
         const { movieData , onBackClick  } = this.props;
@@ -10513,12 +10513,12 @@ class MovieView extends (0, _reactDefault.default).Component {
                         children: movieData.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 71,
+                        lineNumber: 70,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 70,
+                    lineNumber: 69,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Body, {
@@ -10527,7 +10527,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                             children: movieData.Description
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 75,
+                            lineNumber: 74,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -10541,12 +10541,12 @@ class MovieView extends (0, _reactDefault.default).Component {
                                         children: movieData.Director.Name
                                     }, void 0, false, {
                                         fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 79,
+                                        lineNumber: 78,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "src/components/movie-view/movie-view.jsx",
-                                    lineNumber: 78,
+                                    lineNumber: 77,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -10556,18 +10556,18 @@ class MovieView extends (0, _reactDefault.default).Component {
                                         children: movieData.Genre.Name
                                     }, void 0, false, {
                                         fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 83,
+                                        lineNumber: 82,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "src/components/movie-view/movie-view.jsx",
-                                    lineNumber: 82,
+                                    lineNumber: 81,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 77,
+                            lineNumber: 76,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -10576,39 +10576,46 @@ class MovieView extends (0, _reactDefault.default).Component {
                                 src: movieData.ImagePath
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 87,
+                                lineNumber: 86,
                                 columnNumber: 37
                             }, this)
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 87,
+                            lineNumber: 86,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
-                    lineNumber: 74,
+                    lineNumber: 73,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default).Footer, {
                     children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                        !this.isFaved(movieData) ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                             variant: "success",
                             onClick: (e)=>this.addFaveMovie(e),
-                            children: " Add to Favorites "
-                        }, void 0, false, {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 91,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                            variant: "success",
-                            onClick: (e)=>this.removeFaveMovie(e),
-                            children: " Remove from Favorites "
-                        }, void 0, false, {
+                            children: [
+                                " ",
+                                "Add to Favorites",
+                                " "
+                            ]
+                        }, void 0, true, {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 92,
-                            columnNumber: 11
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                            variant: "success",
+                            onClick: (e)=>this.removeFaveMovie(e),
+                            children: [
+                                " ",
+                                "Remove from Favorites",
+                                " "
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/movie-view/movie-view.jsx",
+                            lineNumber: 97,
+                            columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                             variant: "success",
@@ -10618,7 +10625,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                             children: "Back"
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 93,
+                            lineNumber: 102,
                             columnNumber: 11
                         }, this)
                     ]
@@ -10630,7 +10637,7 @@ class MovieView extends (0, _reactDefault.default).Component {
             ]
         }, void 0, true, {
             fileName: "src/components/movie-view/movie-view.jsx",
-            lineNumber: 68,
+            lineNumber: 67,
             columnNumber: 7
         }, this);
     }
