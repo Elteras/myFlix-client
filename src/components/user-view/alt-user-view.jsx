@@ -64,7 +64,7 @@ export function UserView(props) {
     const isReq = validate();
     if (isReq) {
       /* Send a request to the server for authentication */
-      axios.put('https://elt-myflix.herokuapp.com/users', {
+      axios.put(`https://elt-myflix.herokuapp.com/users/${props.user.Username}`, {
         Username: username,
         Password: password,
         Email: email
@@ -74,7 +74,6 @@ export function UserView(props) {
           console.log(data);
           alert('Update successful')
           props.setUser(response.data)
-          window.open('/', '_self');
         })
         .catch(e => {
           console.error(response);
@@ -122,7 +121,7 @@ export function UserView(props) {
 
           <Form.Group controlId="formEmail">
             <Form.Label>Email:</Form.Label>
-            <Form.Control type="text" value={email} onChange={e => setPassword(e.target.value)} />
+            <Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} />
           </Form.Group>
 
           <Button className="registrationButton" variant="success" type="submit" onClick={handleSubmit}>
