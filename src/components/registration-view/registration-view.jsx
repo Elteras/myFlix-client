@@ -111,7 +111,7 @@ export function RegistrationView(props) {
 
 }
 
-//Need to do a registration view thing, not sure if the below is correct. 
+
 RegistrationView.propTypes = {
   register: PropTypes.shape({
     Name: PropTypes.string.isRequired,

@@ -9,7 +9,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
-import { UserView } from '../user-view/user-view';
+import { UserView } from '../user-view/alt-user-view';
 import { Menubar } from '../navbar/navbar';
 
 import Row from 'react-bootstrap/Row';
@@ -153,6 +153,7 @@ export class MainView extends React.Component {
                 <UserView
                   user={user}
                   movies={movies}
+                  setUser={(user) => { this.setUser(user) }}
                   onBackClick={() => history.goBack()} />
               </Col>
             }} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -8,27 +8,63 @@ import { Link } from "react-router-dom";
 
 import './user-view.scss';
 
+//user, movies, setUser, onBackClick
 
-
-export function UserView(user, movies, onBackClick) {
+export function UserView(props) {
 
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const userFaves = user.FavoriteMovies?.map((movieId) =>
-    movies.find((movie) => movie._id === movieId)
+  const [nameErr, setNameErr] = useState('');
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
+
+  const userFaves = props.user.FavoriteMovies?.map((movieId) =>
+    props.movies.find((movie) => movie._id === movieId)
   );
 
+  const validate = () => {
+    let isReq = true;
+    if (!name) {
+      setNameErr('Name Required');
+      isReq = false;
+    }
+    if (!username) {
+      setUsernameErr('Username Required');
+      isReq = false;
+    } else if (username.length < 3) {
+      setUsernameErr('Username must be at least 3 characters long');
+      isReq = false;
+    }
 
+    if (!password) {
+      setPasswordErr('Password Required');
+      isReq = false;
+    } else if (password.length < 5) {
+      setPassword('Password must be at least 5 characters long');
+      isReq = false;
+    }
+
+    if (!email) {
+      setEmailErr('Email Required');
+      isReq = false;
+    } else if (email.indexOf('@') === -1) {
+      setEmail('Email is invalid');   // Include more proper/robust email validation logic later. also, setEmail or setEmailErr?
+      isReq = false;
+    }
+
+    return isReq
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
       /* Send a request to the server for authentication */
-      axios.post('https://elt-myflix.herokuapp.com/users', {
+      axios.put('https://elt-myflix.herokuapp.com/users', {
         Username: username,
         Password: password,
         Email: email
@@ -37,6 +73,7 @@ export function UserView(user, movies, onBackClick) {
           const data = response.data;
           console.log(data);
           alert('Update successful')
+          props.setUser(response.data)
           window.open('/', '_self');
         })
         .catch(e => {
@@ -49,9 +86,9 @@ export function UserView(user, movies, onBackClick) {
   return (
     <>
       <div>
-        <p>Name: {user.Username}</p>
-        <p>Email: {user.Email}</p>
-        <p>Birthday: {user.Birthday}</p>
+        <p>Name: {props.user.Username}</p>
+        <p>Email: {props.user.Email}</p>
+        <p>Birthday: {props.user.Birthday}</p>
       </div>
       <div>
         <p>Favorite Movies:</p>
@@ -97,3 +134,12 @@ export function UserView(user, movies, onBackClick) {
   )
 
 }
+
+UserView.propTypes = {
+  register: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired
+  }),
+};
