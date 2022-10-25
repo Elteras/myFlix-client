@@ -43,4 +43,7 @@ DirectorView.propTypes = {
     Bio: PropTypes.string.isRequired,
     Birth: PropTypes.string.isRequired
   }).isRequired,
+  moviesDirected: PropTypes.array.isRequired,
+  onBackClick: PropTypes.func.isRequired,
+
 };

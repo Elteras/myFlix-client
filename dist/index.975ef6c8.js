@@ -6080,16 +6080,7 @@ $parcel$ReactRefreshHelpers$67b2.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieCard", ()=>MovieCard) //cant remember why i commented this out. do i need it?
- // MovieCard.propTypes = {
- //   movieData: PropTypes.shape({
- //     Title: PropTypes.string.isRequired,
- //     Description: PropTypes.string.isRequired,
- //     ImagePath: PropTypes.string.isRequired
- //   }).isRequired,
- //   onMovieClick: PropTypes.func.isRequired
- // };
-;
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -6155,6 +6146,14 @@ class MovieCard extends (0, _reactDefault.default).Component {
         }, this);
     }
 }
+MovieCard.propTypes = {
+    movieData: (0, _propTypesDefault.default).shape({
+        Title: (0, _propTypesDefault.default).string.isRequired,
+        Description: (0, _propTypesDefault.default).string.isRequired,
+        ImagePath: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired,
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
+};
 
   $parcel$ReactRefreshHelpers$67b2.postlude(module);
 } finally {
@@ -10650,7 +10649,9 @@ MovieView.propTypes = {
             Bio: (0, _propTypesDefault.default).string.isRequired,
             Birth: (0, _propTypesDefault.default).string
         })
-    }).isRequired
+    }).isRequired,
+    setUser: (0, _propTypesDefault.default).func.isRequired,
+    onBackClick: (0, _propTypesDefault.default).func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$e9f6.postlude(module);
@@ -40558,7 +40559,6 @@ function RegistrationView(props) {
             alert("Unable to register");
         });
     };
-    //note, havent put in the className="reg-form-inputs" yet
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -40807,7 +40807,9 @@ DirectorView.propTypes = {
         Name: (0, _propTypesDefault.default).string.isRequired,
         Bio: (0, _propTypesDefault.default).string.isRequired,
         Birth: (0, _propTypesDefault.default).string.isRequired
-    }).isRequired
+    }).isRequired,
+    moviesDirected: (0, _propTypesDefault.default).array.isRequired,
+    onBackClick: (0, _propTypesDefault.default).func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$ad4a.postlude(module);
@@ -40893,7 +40895,9 @@ GenreView.propTypes = {
     genre: (0, _propTypesDefault.default).shape({
         Name: (0, _propTypesDefault.default).string.isRequired,
         Description: (0, _propTypesDefault.default).string.isRequired
-    }).isRequired
+    }).isRequired,
+    moviesInGenre: (0, _propTypesDefault.default).array.isRequired,
+    onBackClick: (0, _propTypesDefault.default).func.isRequired
 };
 
   $parcel$ReactRefreshHelpers$377f.postlude(module);
@@ -41218,6 +41222,13 @@ function UserView(props) {
                                         fileName: "src/components/user-view/user-view.jsx",
                                         lineNumber: 122,
                                         columnNumber: 13
+                                    }, this),
+                                    usernameErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        children: usernameErr
+                                    }, void 0, false, {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 123,
+                                        columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
@@ -41232,7 +41243,7 @@ function UserView(props) {
                                         children: "Name:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 126,
+                                        lineNumber: 127,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41241,13 +41252,20 @@ function UserView(props) {
                                         onChange: (e)=>setName(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 127,
+                                        lineNumber: 128,
                                         columnNumber: 13
+                                    }, this),
+                                    nameErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        children: nameErr
+                                    }, void 0, false, {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 129,
+                                        columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/user-view.jsx",
-                                lineNumber: 125,
+                                lineNumber: 126,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41257,7 +41275,7 @@ function UserView(props) {
                                         children: "Password:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 131,
+                                        lineNumber: 133,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41266,13 +41284,20 @@ function UserView(props) {
                                         onChange: (e)=>setPassword(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 132,
+                                        lineNumber: 134,
                                         columnNumber: 13
+                                    }, this),
+                                    passwordErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        children: passwordErr
+                                    }, void 0, false, {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 135,
+                                        columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/user-view.jsx",
-                                lineNumber: 130,
+                                lineNumber: 132,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41282,7 +41307,7 @@ function UserView(props) {
                                         children: "Birthday:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 136,
+                                        lineNumber: 139,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41291,13 +41316,20 @@ function UserView(props) {
                                         onChange: (e)=>setBirthday(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 137,
+                                        lineNumber: 140,
                                         columnNumber: 13
+                                    }, this),
+                                    birthdayErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        children: birthdayErr
+                                    }, void 0, false, {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 141,
+                                        columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/user-view.jsx",
-                                lineNumber: 135,
+                                lineNumber: 138,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41307,7 +41339,7 @@ function UserView(props) {
                                         children: "Email:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 141,
+                                        lineNumber: 145,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41316,13 +41348,20 @@ function UserView(props) {
                                         onChange: (e)=>setEmail(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/user-view.jsx",
-                                        lineNumber: 142,
+                                        lineNumber: 146,
                                         columnNumber: 13
+                                    }, this),
+                                    emailErr && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        children: emailErr
+                                    }, void 0, false, {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 147,
+                                        columnNumber: 26
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/user-view.jsx",
-                                lineNumber: 140,
+                                lineNumber: 144,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -41333,7 +41372,7 @@ function UserView(props) {
                                 children: "Update"
                             }, void 0, false, {
                                 fileName: "src/components/user-view/user-view.jsx",
-                                lineNumber: 145,
+                                lineNumber: 150,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -41358,7 +41397,10 @@ UserView.propTypes = {
         Username: (0, _propTypesDefault.default).string.isRequired,
         Password: (0, _propTypesDefault.default).string.isRequired,
         Email: (0, _propTypesDefault.default).string.isRequired
-    }).isRequired
+    }).isRequired,
+    movies: (0, _propTypesDefault.default).array.isRequired,
+    setUser: (0, _propTypesDefault.default).func.isRequired,
+    onBackClick: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
 $RefreshReg$(_c, "UserView");

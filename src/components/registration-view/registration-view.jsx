@@ -74,7 +74,7 @@ export function RegistrationView(props) {
     };
   }
 
-  //note, havent put in the className="reg-form-inputs" yet
+
   return (
 
     <Form>

@@ -36,4 +36,6 @@ GenreView.propTypes = {
     Name: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired
   }).isRequired,
+  moviesInGenre: PropTypes.array.isRequired,
+  onBackClick: PropTypes.func.isRequired,
 };
