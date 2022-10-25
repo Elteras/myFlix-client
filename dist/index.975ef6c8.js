@@ -40541,13 +40541,13 @@ function RegistrationView(props) {
             Username: username,
             Password: password,
             Email: email
-        }).then((response1)=>{
-            const data = response1.data;
+        }).then((response)=>{
+            const data = response.data;
             console.log(data);
             alert("Registration successful");
             window.open("/", "_self");
         }).catch((e)=>{
-            console.error(response);
+            console.error(e);
             alert("Unable to register");
         });
     };
@@ -40703,7 +40703,7 @@ function RegistrationView(props) {
 _s(RegistrationView, "SVrbwJAorh1UuvC/GCCrc3+Fi50=");
 _c = RegistrationView;
 RegistrationView.propTypes = {
-    register: (0, _propTypesDefault.default).shape({
+    RegistrationView: (0, _propTypesDefault.default).shape({
         Name: (0, _propTypesDefault.default).string.isRequired,
         Username: (0, _propTypesDefault.default).string.isRequired,
         Password: (0, _propTypesDefault.default).string.isRequired,
@@ -41044,10 +41044,12 @@ function UserView(props) {
     const [name, setName] = (0, _react.useState)("");
     const [username, setUsername] = (0, _react.useState)("");
     const [password, setPassword] = (0, _react.useState)("");
+    const [birthday, setBirthday] = (0, _react.useState)("");
     const [email, setEmail] = (0, _react.useState)("");
     const [nameErr, setNameErr] = (0, _react.useState)("");
     const [usernameErr, setUsernameErr] = (0, _react.useState)("");
     const [passwordErr, setPasswordErr] = (0, _react.useState)("");
+    const [birthdayErr, setBirthdayErr] = (0, _react.useState)("");
     const [emailErr, setEmailErr] = (0, _react.useState)("");
     const userFaves = props.user.FavoriteMovies?.map((movieId)=>props.movies.find((movie)=>movie._id === movieId));
     const validate = ()=>{
@@ -41082,17 +41084,23 @@ function UserView(props) {
     const handleSubmit = (e)=>{
         e.preventDefault();
         const isReq = validate();
+        const token = localStorage.getItem("token");
         if (isReq) /* Send a request to the server for authentication */ (0, _axiosDefault.default).put(`https://elt-myflix.herokuapp.com/users/${props.user.Username}`, {
             Username: username,
             Password: password,
+            Birthday: birthday,
             Email: email
-        }).then((response1)=>{
-            const data = response1.data;
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            const data = response.data;
             console.log(data);
             alert("Update successful");
-            props.setUser(response1.data);
+            props.setUser(response.data);
         }).catch((e)=>{
-            console.error(response);
+            console.error(e);
             alert("Unable to update");
         });
     };
@@ -41107,7 +41115,7 @@ function UserView(props) {
                         ]
                     }, void 0, true, {
                         fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 88,
+                        lineNumber: 96,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -41117,7 +41125,7 @@ function UserView(props) {
                         ]
                     }, void 0, true, {
                         fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 89,
+                        lineNumber: 97,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -41127,13 +41135,13 @@ function UserView(props) {
                         ]
                     }, void 0, true, {
                         fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 90,
+                        lineNumber: 98,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/user-view/alt-user-view.jsx",
-                lineNumber: 87,
+                lineNumber: 95,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -41142,7 +41150,7 @@ function UserView(props) {
                         children: "Favorite Movies:"
                     }, void 0, false, {
                         fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 93,
+                        lineNumber: 101,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
@@ -41150,18 +41158,18 @@ function UserView(props) {
                                 children: fm.Title
                             }, void 0, false, {
                                 fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 97,
+                                lineNumber: 105,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 95,
+                        lineNumber: 103,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/user-view/alt-user-view.jsx",
-                lineNumber: 92,
+                lineNumber: 100,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
@@ -41170,7 +41178,7 @@ function UserView(props) {
                         children: "Update information"
                     }, void 0, false, {
                         fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 105,
+                        lineNumber: 113,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
@@ -41182,7 +41190,7 @@ function UserView(props) {
                                         children: "Username:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 108,
+                                        lineNumber: 116,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41191,13 +41199,13 @@ function UserView(props) {
                                         onChange: (e)=>setUsername(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 109,
+                                        lineNumber: 117,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 107,
+                                lineNumber: 115,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41207,7 +41215,7 @@ function UserView(props) {
                                         children: "Name:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 113,
+                                        lineNumber: 121,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41216,13 +41224,13 @@ function UserView(props) {
                                         onChange: (e)=>setName(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 114,
+                                        lineNumber: 122,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 112,
+                                lineNumber: 120,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41232,7 +41240,7 @@ function UserView(props) {
                                         children: "Password:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 118,
+                                        lineNumber: 126,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41241,13 +41249,38 @@ function UserView(props) {
                                         onChange: (e)=>setPassword(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 119,
+                                        lineNumber: 127,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 117,
+                                lineNumber: 125,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                controlId: "formBirthday",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                        children: "Birthday:"
+                                    }, void 0, false, {
+                                        fileName: "src/components/user-view/alt-user-view.jsx",
+                                        lineNumber: 131,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                        type: "date",
+                                        value: birthday,
+                                        onChange: (e)=>setBirthday(e.target.value)
+                                    }, void 0, false, {
+                                        fileName: "src/components/user-view/alt-user-view.jsx",
+                                        lineNumber: 132,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/user-view/alt-user-view.jsx",
+                                lineNumber: 130,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41257,7 +41290,7 @@ function UserView(props) {
                                         children: "Email:"
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 123,
+                                        lineNumber: 136,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41266,13 +41299,13 @@ function UserView(props) {
                                         onChange: (e)=>setEmail(e.target.value)
                                     }, void 0, false, {
                                         fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 124,
+                                        lineNumber: 137,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 122,
+                                lineNumber: 135,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -41283,28 +41316,28 @@ function UserView(props) {
                                 children: "Update"
                             }, void 0, false, {
                                 fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 127,
+                                lineNumber: 140,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 106,
+                        lineNumber: 114,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/user-view/alt-user-view.jsx",
-                lineNumber: 104,
+                lineNumber: 112,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true);
 }
-_s(UserView, "SVrbwJAorh1UuvC/GCCrc3+Fi50=");
+_s(UserView, "C5EvmPqIAXcI92WboGJlWUO9qj4=");
 _c = UserView;
 UserView.propTypes = {
-    register: (0, _propTypesDefault.default).shape({
+    UserView: (0, _propTypesDefault.default).shape({
         Name: (0, _propTypesDefault.default).string.isRequired,
         Username: (0, _propTypesDefault.default).string.isRequired,
         Password: (0, _propTypesDefault.default).string.isRequired,

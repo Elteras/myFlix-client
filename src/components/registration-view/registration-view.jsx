@@ -68,7 +68,7 @@ export function RegistrationView(props) {
           window.open('/', '_self');
         })
         .catch(e => {
-          console.error(response);
+          console.error(e);
           alert('Unable to register');
         });
     };
@@ -113,7 +113,7 @@ export function RegistrationView(props) {
 
 
 RegistrationView.propTypes = {
-  register: PropTypes.shape({
+  RegistrationView: PropTypes.shape({
     Name: PropTypes.string.isRequired,
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,

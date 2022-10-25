@@ -15,11 +15,13 @@ export function UserView(props) {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [birthday, setBirthday] = useState('');
   const [email, setEmail] = useState('');
 
   const [nameErr, setNameErr] = useState('');
   const [usernameErr, setUsernameErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
+  const [birthdayErr, setBirthdayErr] = useState('');
   const [emailErr, setEmailErr] = useState('');
 
   const userFaves = props.user.FavoriteMovies?.map((movieId) =>
@@ -62,13 +64,19 @@ export function UserView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
+    const token = localStorage.getItem("token");
     if (isReq) {
       /* Send a request to the server for authentication */
-      axios.put(`https://elt-myflix.herokuapp.com/users/${props.user.Username}`, {
-        Username: username,
-        Password: password,
-        Email: email
-      })
+      axios.put(
+        `https://elt-myflix.herokuapp.com/users/${props.user.Username}`,
+        {
+          Username: username,
+          Password: password,
+          Birthday: birthday,
+          Email: email
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
         .then(response => {
           const data = response.data;
           console.log(data);
@@ -76,7 +84,7 @@ export function UserView(props) {
           props.setUser(response.data)
         })
         .catch(e => {
-          console.error(response);
+          console.error(e);
           alert('Unable to update');
         });
     };
@@ -119,6 +127,11 @@ export function UserView(props) {
             <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
           </Form.Group>
 
+          <Form.Group controlId="formBirthday">
+            <Form.Label>Birthday:</Form.Label>
+            <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+          </Form.Group>
+
           <Form.Group controlId="formEmail">
             <Form.Label>Email:</Form.Label>
             <Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} />
@@ -135,7 +148,7 @@ export function UserView(props) {
 }
 
 UserView.propTypes = {
-  register: PropTypes.shape({
+  UserView: PropTypes.shape({
     Name: PropTypes.string.isRequired,
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
