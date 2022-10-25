@@ -5663,7 +5663,7 @@ var _movieView = require("../movie-view/movie-view");
 var _registrationView = require("../registration-view/registration-view");
 var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
-var _altUserView = require("../user-view/alt-user-view");
+var _userView = require("../user-view/user-view");
 var _navbar = require("../navbar/navbar");
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
@@ -5825,7 +5825,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                     }, void 0, false, void 0, void 0);
                                     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                         md: 8,
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _altUserView.UserView), {
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _userView.UserView), {
                                             user: user,
                                             movies: movies,
                                             setUser: (user)=>{
@@ -5921,7 +5921,7 @@ class MainView extends (0, _reactDefault.default).Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","axios":"jo6P5","../login-view/login-view":"9YtA0","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./main-view.scss":"eBaMl","react-bootstrap/Button":"aPzUt","react-bootstrap/Container":"hEdsw","react-router-dom":"cHIiW","../registration-view/registration-view":"3U8r7","../director-view/director-view":"9tpci","../genre-view/genre-view":"4tuA0","../navbar/navbar":"bNPgg","../user-view/alt-user-view":"7pagf"}],"lHL0p":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","axios":"jo6P5","../login-view/login-view":"9YtA0","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./main-view.scss":"eBaMl","react-bootstrap/Button":"aPzUt","react-bootstrap/Container":"hEdsw","react-router-dom":"cHIiW","../registration-view/registration-view":"3U8r7","../director-view/director-view":"9tpci","../genre-view/genre-view":"4tuA0","../navbar/navbar":"bNPgg","../user-view/user-view":"7daVh"}],"lHL0p":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -10443,16 +10443,7 @@ $parcel$ReactRefreshHelpers$e9f6.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "MovieView", ()=>MovieView) //cant remember why i commented this all out
- // MovieView.propTypes = {
- //   movieData: PropTypes.shape({
- //     Title: PropTypes.string.isRequired,
- //     Description: PropTypes.string.isRequired,
- //     ImagePath: PropTypes.string.isRequired
- //   }).isRequired,
- //   onBackClick: PropTypes.func.isRequired
- // }
-;
+parcelHelpers.export(exports, "MovieView", ()=>MovieView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -10645,6 +10636,22 @@ class MovieView extends (0, _reactDefault.default).Component {
         }, this);
     }
 }
+MovieView.propTypes = {
+    movieData: (0, _propTypesDefault.default).shape({
+        Title: (0, _propTypesDefault.default).string.isRequired,
+        Description: (0, _propTypesDefault.default).string.isRequired,
+        ImagePath: (0, _propTypesDefault.default).string.isRequired,
+        Genre: (0, _propTypesDefault.default).shape({
+            Name: (0, _propTypesDefault.default).string.isRequired,
+            Description: (0, _propTypesDefault.default).string.isRequired
+        }),
+        Director: (0, _propTypesDefault.default).shape({
+            Name: (0, _propTypesDefault.default).string.isRequired,
+            Bio: (0, _propTypesDefault.default).string.isRequired,
+            Birth: (0, _propTypesDefault.default).string
+        })
+    }).isRequired
+};
 
   $parcel$ReactRefreshHelpers$e9f6.postlude(module);
 } finally {
@@ -40702,14 +40709,6 @@ function RegistrationView(props) {
 }
 _s(RegistrationView, "SVrbwJAorh1UuvC/GCCrc3+Fi50=");
 _c = RegistrationView;
-RegistrationView.propTypes = {
-    RegistrationView: (0, _propTypesDefault.default).shape({
-        Name: (0, _propTypesDefault.default).string.isRequired,
-        Username: (0, _propTypesDefault.default).string.isRequired,
-        Password: (0, _propTypesDefault.default).string.isRequired,
-        Email: (0, _propTypesDefault.default).string.isRequired
-    })
-};
 var _c;
 $RefreshReg$(_c, "RegistrationView");
 
@@ -40727,8 +40726,7 @@ $parcel$ReactRefreshHelpers$ad4a.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "DirectorView", ()=>DirectorView) // need code to show all movies with that director
-;
+parcelHelpers.export(exports, "DirectorView", ()=>DirectorView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -40786,7 +40784,7 @@ class DirectorView extends (0, _reactDefault.default).Component {
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                     children: moviesDirected?.map((m)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             children: m.Title
-                        }, void 0, false, {
+                        }, m._id, false, {
                             fileName: "src/components/director-view/director-view.jsx",
                             lineNumber: 28,
                             columnNumber: 13
@@ -40804,6 +40802,13 @@ class DirectorView extends (0, _reactDefault.default).Component {
         }, this);
     }
 }
+DirectorView.propTypes = {
+    director: (0, _propTypesDefault.default).shape({
+        Name: (0, _propTypesDefault.default).string.isRequired,
+        Bio: (0, _propTypesDefault.default).string.isRequired,
+        Birth: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired
+};
 
   $parcel$ReactRefreshHelpers$ad4a.postlude(module);
 } finally {
@@ -40819,8 +40824,7 @@ $parcel$ReactRefreshHelpers$377f.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "GenreView", ()=>GenreView) // need to show all movies of a certain genre
-;
+parcelHelpers.export(exports, "GenreView", ()=>GenreView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
@@ -40867,7 +40871,7 @@ class GenreView extends (0, _reactDefault.default).Component {
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                     children: moviesInGenre?.map((m)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                             children: m.Title
-                        }, void 0, false, {
+                        }, m._id, false, {
                             fileName: "src/components/genre-view/genre-view.jsx",
                             lineNumber: 24,
                             columnNumber: 13
@@ -40885,6 +40889,12 @@ class GenreView extends (0, _reactDefault.default).Component {
         }, this);
     }
 }
+GenreView.propTypes = {
+    genre: (0, _propTypesDefault.default).shape({
+        Name: (0, _propTypesDefault.default).string.isRequired,
+        Description: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired
+};
 
   $parcel$ReactRefreshHelpers$377f.postlude(module);
 } finally {
@@ -40900,16 +40910,12 @@ $parcel$ReactRefreshHelpers$8fd2.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Menubar", ()=>Menubar) // {user ? <Row>
- //   <Col className="text-center">
- //     <Button className="logoutButton" variant="success" onClick={() => { this.onLoggedOut() }}>Log out</Button>
- //   </Col>
- // </Row>
- //   : null}
-;
+parcelHelpers.export(exports, "Menubar", ()=>Menubar);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 function Menubar({ user  }) {
     const onLoggedOut = ()=>{
@@ -40935,14 +40941,14 @@ function Menubar({ user  }) {
                     children: "myFlix"
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 26,
+                    lineNumber: 27,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Toggle, {
                     "aria-controls": "responsive-navbar-nav"
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 27,
+                    lineNumber: 28,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -40955,7 +40961,7 @@ function Menubar({ user  }) {
                                 children: user.Username
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 31,
+                                lineNumber: 32,
                                 columnNumber: 15
                             }, this),
                             isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -40966,7 +40972,7 @@ function Menubar({ user  }) {
                                 children: "Logout"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 34,
+                                lineNumber: 35,
                                 columnNumber: 15
                             }, this),
                             !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -40974,7 +40980,7 @@ function Menubar({ user  }) {
                                 children: "Sign In"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 37,
+                                lineNumber: 38,
                                 columnNumber: 15
                             }, this),
                             !isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -40982,33 +40988,40 @@ function Menubar({ user  }) {
                                 children: "Sign Up"
                             }, void 0, false, {
                                 fileName: "src/components/navbar/navbar.jsx",
-                                lineNumber: 40,
+                                lineNumber: 41,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/navbar/navbar.jsx",
-                        lineNumber: 29,
+                        lineNumber: 30,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 28,
+                    lineNumber: 29,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/navbar/navbar.jsx",
-            lineNumber: 25,
+            lineNumber: 26,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/navbar/navbar.jsx",
-        lineNumber: 24,
+        lineNumber: 25,
         columnNumber: 5
     }, this);
 }
 _c = Menubar;
+Menubar.propTypes = {
+    user: (0, _propTypesDefault.default).shape({
+        Username: (0, _propTypesDefault.default).string.isRequired,
+        Password: (0, _propTypesDefault.default).string.isRequired,
+        Email: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired
+};
 var _c;
 $RefreshReg$(_c, "Menubar");
 
@@ -41017,11 +41030,11 @@ $RefreshReg$(_c, "Menubar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ"}],"7pagf":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$15d9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ","prop-types":"7wKI2"}],"7daVh":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5968 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$15d9.prelude(module);
+$parcel$ReactRefreshHelpers$5968.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -41072,6 +41085,10 @@ function UserView(props) {
             setPassword("Password must be at least 5 characters long");
             isReq = false;
         }
+        if (!birthday) {
+            setBirthdayErr("Birthday Required");
+            isReq = false;
+        }
         if (!email) {
             setEmailErr("Email Required");
             isReq = false;
@@ -41114,8 +41131,8 @@ function UserView(props) {
                             props.user.Username
                         ]
                     }, void 0, true, {
-                        fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 96,
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 101,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -41124,8 +41141,8 @@ function UserView(props) {
                             props.user.Email
                         ]
                     }, void 0, true, {
-                        fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 97,
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 102,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -41134,14 +41151,14 @@ function UserView(props) {
                             props.user.Birthday
                         ]
                     }, void 0, true, {
-                        fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 98,
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 103,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
-                fileName: "src/components/user-view/alt-user-view.jsx",
-                lineNumber: 95,
+                fileName: "src/components/user-view/user-view.jsx",
+                lineNumber: 100,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -41149,27 +41166,27 @@ function UserView(props) {
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         children: "Favorite Movies:"
                     }, void 0, false, {
-                        fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 101,
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 106,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                         children: userFaves?.map((fm)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                 children: fm.Title
-                            }, void 0, false, {
-                                fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 105,
+                            }, fm._id, false, {
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 110,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
-                        fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 103,
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 108,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
-                fileName: "src/components/user-view/alt-user-view.jsx",
-                lineNumber: 100,
+                fileName: "src/components/user-view/user-view.jsx",
+                lineNumber: 105,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
@@ -41177,8 +41194,8 @@ function UserView(props) {
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                         children: "Update information"
                     }, void 0, false, {
-                        fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 113,
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 118,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
@@ -41189,8 +41206,8 @@ function UserView(props) {
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                         children: "Username:"
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 116,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 121,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41198,14 +41215,14 @@ function UserView(props) {
                                         value: username,
                                         onChange: (e)=>setUsername(e.target.value)
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 117,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 122,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 115,
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 120,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41214,8 +41231,8 @@ function UserView(props) {
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                         children: "Name:"
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 121,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 126,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41223,14 +41240,14 @@ function UserView(props) {
                                         value: name,
                                         onChange: (e)=>setName(e.target.value)
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 122,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 127,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 120,
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 125,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41239,8 +41256,8 @@ function UserView(props) {
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                         children: "Password:"
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 126,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 131,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41248,14 +41265,14 @@ function UserView(props) {
                                         value: password,
                                         onChange: (e)=>setPassword(e.target.value)
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 127,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 132,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 125,
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 130,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41264,8 +41281,8 @@ function UserView(props) {
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                         children: "Birthday:"
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 131,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 136,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41273,14 +41290,14 @@ function UserView(props) {
                                         value: birthday,
                                         onChange: (e)=>setBirthday(e.target.value)
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 132,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 137,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 130,
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 135,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -41289,8 +41306,8 @@ function UserView(props) {
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
                                         children: "Email:"
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 136,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 141,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -41298,14 +41315,14 @@ function UserView(props) {
                                         value: email,
                                         onChange: (e)=>setEmail(e.target.value)
                                     }, void 0, false, {
-                                        fileName: "src/components/user-view/alt-user-view.jsx",
-                                        lineNumber: 137,
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 142,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 135,
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 140,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -41315,20 +41332,20 @@ function UserView(props) {
                                 onClick: handleSubmit,
                                 children: "Update"
                             }, void 0, false, {
-                                fileName: "src/components/user-view/alt-user-view.jsx",
-                                lineNumber: 140,
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 145,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
-                        fileName: "src/components/user-view/alt-user-view.jsx",
-                        lineNumber: 114,
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 119,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
-                fileName: "src/components/user-view/alt-user-view.jsx",
-                lineNumber: 112,
+                fileName: "src/components/user-view/user-view.jsx",
+                lineNumber: 117,
                 columnNumber: 7
             }, this)
         ]
@@ -41337,17 +41354,16 @@ function UserView(props) {
 _s(UserView, "C5EvmPqIAXcI92WboGJlWUO9qj4=");
 _c = UserView;
 UserView.propTypes = {
-    UserView: (0, _propTypesDefault.default).shape({
-        Name: (0, _propTypesDefault.default).string.isRequired,
+    user: (0, _propTypesDefault.default).shape({
         Username: (0, _propTypesDefault.default).string.isRequired,
         Password: (0, _propTypesDefault.default).string.isRequired,
         Email: (0, _propTypesDefault.default).string.isRequired
-    })
+    }).isRequired
 };
 var _c;
 $RefreshReg$(_c, "UserView");
 
-  $parcel$ReactRefreshHelpers$15d9.postlude(module);
+  $parcel$ReactRefreshHelpers$5968.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;

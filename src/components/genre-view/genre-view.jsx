@@ -21,7 +21,7 @@ export class GenreView extends React.Component {
         <p> Movies in the {genre.Name} genre:</p>
         <ul>
           {moviesInGenre?.map(m => (
-            <div>{m.Title}</div>
+            <div key={m._id}>{m.Title}</div>
           ))}
         </ul>
       </div>
@@ -31,4 +31,9 @@ export class GenreView extends React.Component {
   }
 }
 
-// need to show all movies of a certain genre
+GenreView.propTypes = {
+  genre: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired
+  }).isRequired,
+};

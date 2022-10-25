@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Nav, Navbar, Container, Button } from 'react-bootstrap';
 
 export function Menubar({ user }) {
@@ -47,10 +48,10 @@ export function Menubar({ user }) {
   )
 }
 
-
-// {user ? <Row>
-//   <Col className="text-center">
-//     <Button className="logoutButton" variant="success" onClick={() => { this.onLoggedOut() }}>Log out</Button>
-//   </Col>
-// </Row>
-//   : null}
+Menubar.propTypes = {
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired
+  }).isRequired,
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -8,39 +8,154 @@ import { Link } from "react-router-dom";
 
 import './user-view.scss';
 
+//user, movies, setUser, onBackClick
 
-export class UserView extends React.Component {
+export function UserView(props) {
 
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [email, setEmail] = useState('');
 
-  render() {
-    const { user, movies, onBackClick } = this.props;
+  const [nameErr, setNameErr] = useState('');
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [birthdayErr, setBirthdayErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
 
-    const userFaves = user.FavoriteMovies?.map((movieId) =>
-      movies.find((movie) => movie._id === movieId)
-    );
+  const userFaves = props.user.FavoriteMovies?.map((movieId) =>
+    props.movies.find((movie) => movie._id === movieId)
+  );
 
-    return (
-      <>
-        <div>
-          <p>Name: {user.Username}</p>
-          <p>Email: {user.Email}</p>
-          <p>Birthday: {user.Birthday}</p>
-        </div>
-        <div>
-          <p>Favorite Movies:</p>
+  const validate = () => {
+    let isReq = true;
+    if (!name) {
+      setNameErr('Name Required');
+      isReq = false;
+    }
+    if (!username) {
+      setUsernameErr('Username Required');
+      isReq = false;
+    } else if (username.length < 3) {
+      setUsernameErr('Username must be at least 3 characters long');
+      isReq = false;
+    }
 
-          <ul>
-            {userFaves?.map((fm) => (
-              <li>{fm.Title}</li>
-            ))}
-          </ul>
+    if (!password) {
+      setPasswordErr('Password Required');
+      isReq = false;
+    } else if (password.length < 5) {
+      setPassword('Password must be at least 5 characters long');
+      isReq = false;
+    }
 
-        </div>
+    if (!birthday) {
+      setBirthdayErr('Birthday Required');
+      isReq = false;
+    }
 
+    if (!email) {
+      setEmailErr('Email Required');
+      isReq = false;
+    } else if (email.indexOf('@') === -1) {
+      setEmail('Email is invalid');   // Include more proper/robust email validation logic later. also, setEmail or setEmailErr?
+      isReq = false;
+    }
 
-      </>
-
-    )
-
+    return isReq
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isReq = validate();
+    const token = localStorage.getItem("token");
+    if (isReq) {
+      /* Send a request to the server for authentication */
+      axios.put(
+        `https://elt-myflix.herokuapp.com/users/${props.user.Username}`,
+        {
+          Username: username,
+          Password: password,
+          Birthday: birthday,
+          Email: email
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          alert('Update successful')
+          props.setUser(response.data)
+        })
+        .catch(e => {
+          console.error(e);
+          alert('Unable to update');
+        });
+    };
+  }
+
+  return (
+    <>
+      <div>
+        <p>Name: {props.user.Username}</p>
+        <p>Email: {props.user.Email}</p>
+        <p>Birthday: {props.user.Birthday}</p>
+      </div>
+      <div>
+        <p>Favorite Movies:</p>
+
+        <ul>
+          {userFaves?.map((fm) => (
+            <li key={fm._id}>{fm.Title}</li>
+          ))}
+        </ul>
+
+      </div>
+
+
+      <Card>
+        <h3>Update information</h3>
+        <Form>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="formName">
+            <Form.Label>Name:</Form.Label>
+            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="formBirthday">
+            <Form.Label>Birthday:</Form.Label>
+            <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} />
+          </Form.Group>
+
+          <Button className="registrationButton" variant="success" type="submit" onClick={handleSubmit}>
+            Update
+          </Button>
+        </Form>
+      </Card>
+    </>
+  )
+
 }
+
+UserView.propTypes = {
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired
+  }).isRequired,
+};

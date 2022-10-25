@@ -25,7 +25,7 @@ export class DirectorView extends React.Component {
 
         <ul>
           {moviesDirected?.map(m => (
-            <div>{m.Title}</div>
+            <div key={m._id}>{m.Title}</div>
           ))}
         </ul>
 
@@ -37,4 +37,10 @@ export class DirectorView extends React.Component {
   }
 }
 
-// need code to show all movies with that director
+DirectorView.propTypes = {
+  director: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Bio: PropTypes.string.isRequired,
+    Birth: PropTypes.string.isRequired
+  }).isRequired,
+};
