@@ -6,16 +6,51 @@
   height: 100%;
 }
 
+.director-button {
+  text-decoration: none;
+}
 
+.links {
+  justify-content: left;
+  display: flex;
+}
+
+.movie-poster {
+  justify-content: center;
+  margin-top: 10px;
+  display: flex;
+}
 
 .loginButton {
   margin-top: 15px;
+}
+
+.registrationButton {
+  margin-top: 15px;
+  margin-left: 10px;
 }
 
 .movie-card-col {
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+.login-view-col {
+  width: 100%;
+}
+
+.logoutButton {
+  margin-top: 17px;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
 
 .my-flix {
   color: #4682b4;
