@@ -1,6 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 
+
+//3.8 react-redux stuff
+import { connect } from 'react-redux';
+import { setMovies } from '../../actions/actions'
+import MoviesList from '../movies-list/movies-list'
+//---------------
+
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { LoginView } from '../login-view/login-view';
@@ -19,7 +26,8 @@ import Container from 'react-bootstrap/Container'
 
 import './main-view.scss';
 
-export class MainView extends React.Component {
+//export keyword removed (3.8)
+class MainView extends React.Component {
 
   constructor() {
     super();
@@ -73,15 +81,14 @@ export class MainView extends React.Component {
     localStorage.setItem('user', JSON.stringify(user))
   }
 
+
+  //changed for 3.8. might need to check and change some other things to match. 
   getMovies(token) {
     axios.get('https://elt-myflix.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        //Assign result to the state
-        this.setState({
-          movies: response.data
-        });
+        this.props.setMovies(response.data); // this is the changed line. 
       })
       .catch(function (error) {
         console.log(error);
@@ -91,7 +98,8 @@ export class MainView extends React.Component {
 
 
   render() {
-    const { movies, selectedMovie, user } = this.state;
+    const { selectedMovie, user } = this.state;
+    const { movies } = this.props;
 
     return (
       <>
@@ -110,21 +118,23 @@ export class MainView extends React.Component {
 
               if (movies.length === 0) return <div className="main-view"></div>;
 
-              {
-                return <>
-                  {movies.map(m => (
-                    <Col className="movie-card-col" md={3} key={m._id}>
-                      <MovieCard
-                        movieData={m}
-                        onMovieClick={movie => { this.setSelectedMovie(movie) }} />
-                    </Col>
-                  ))}
-                  <MovieView
-                    movieData={selectedMovie}
-                    setUser={(user) => { this.setUser(user) }}
-                    onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-                </>
-              }
+              return <MoviesList movies={movies} />    // new line. should it be below?
+
+              // {
+              //   return <>
+              //     {movies.map(m => (
+              //       <Col className="movie-card-col" md={3} key={m._id}>
+              //         <MovieCard
+              //           movieData={m}
+              //           onMovieClick={movie => { this.setSelectedMovie(movie) }} />
+              //       </Col>
+              //     ))}
+              //     <MovieView
+              //       movieData={selectedMovie}
+              //       setUser={(user) => { this.setUser(user) }}
+              //       onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+              //   </>
+              // }
             }} />
 
 
@@ -205,12 +215,14 @@ export class MainView extends React.Component {
     );
   }
 
-
-
-
-
-
-
-
 }
+
+//exercise told me to put this *above* the yellow bracket just above but that broke the app so idfk.
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
+
+
+
+export default connect(mapStateToProps, { setMovies })(MainView);
 
