@@ -2905,18 +2905,19 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
-var _client = require("react-dom/client");
 var _container = require("react-bootstrap/Container");
 var _containerDefault = parcelHelpers.interopDefault(_container);
+// import { createRoot } from 'react-dom/client';
 var _redux = require("redux");
 var _reactRedux = require("react-redux");
-var _reduxDevtoolsExtension = require("redux-devtools-extension");
+// import { devToolsEnhancer } from 'redux-devtools-extension';
 var _reducers = require("./reducers/reducers");
 var _reducersDefault = parcelHelpers.interopDefault(_reducers);
 var _mainView = require("./components/main-view/main-view");
 var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
 var _indexScss = require("./index.scss");
-const store = (0, _redux.createStore)((0, _reducersDefault.default), (0, _reduxDevtoolsExtension.devToolsEnhancer));
+// const store = createStore(moviesApp, devToolsEnhancer);
+const store = (0, _redux.createStore)((0, _reducersDefault.default));
 //Main component (will eventually use all others)
 class MyFlixApplication extends (0, _reactDefault.default).Component {
     render() {
@@ -2925,17 +2926,17 @@ class MyFlixApplication extends (0, _reactDefault.default).Component {
             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _containerDefault.default), {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainViewDefault.default), {}, void 0, false, {
                     fileName: "src/index.js",
-                    lineNumber: 25,
+                    lineNumber: 26,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "src/index.js",
-                lineNumber: 24,
+                lineNumber: 25,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "src/index.js",
-            lineNumber: 23,
+            lineNumber: 24,
             columnNumber: 7
         }, this);
     }
@@ -2953,7 +2954,7 @@ const container = document.getElementsByClassName("app-container")[0];
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ","react-dom/client":"lOjBx","react-bootstrap/Container":"hEdsw","react-dom":"j6uA9","redux":"cDNB3","react-redux":"bdVon","redux-devtools-extension":"fOPxo","./reducers/reducers":"dgblV"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ","react-bootstrap/Container":"hEdsw","react-dom":"j6uA9","redux":"cDNB3","react-redux":"bdVon","./reducers/reducers":"dgblV"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("./cjs/react-jsx-dev-runtime.development.js");
 
@@ -5782,8 +5783,10 @@ class MainView extends (0, _reactDefault.default).Component {
                                         className: "main-view"
                                     }, void 0, false, void 0, void 0);
                                     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _moviesListDefault.default), {
-                                        movies: movies
-                                    }, void 0, false, void 0, void 0) // new line. should it be below?
+                                        movies: movies,
+                                        selectedMovie: selectedMovie,
+                                        setSelectedMovie: this.setSelectedMovie
+                                    }, void 0, false, void 0, void 0) // new line
                                     ;
                                 // {
                                 //   return <>
@@ -42950,6 +42953,7 @@ var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _reactRedux = require("react-redux");
 var _movieCard = require("../movie-card/movie-card");
+var _movieView = require("../movie-view/movie-view");
 const mapStateToProps = (state)=>{
     const { visibilityFilter  } = state;
     return {
@@ -42957,30 +42961,51 @@ const mapStateToProps = (state)=>{
     };
 };
 function MoviesList(props) {
-    const { movies , visibilityFilter  } = props;
+    const { movies , selectedMovie , setSelectedMovie , visibilityFilter  } = props;
     let filteredMovies = movies;
     if (visibilityFilter !== "") filteredMovies = movies.filter((m)=>m.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
     if (!movies) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "main-view"
     }, void 0, false, {
         fileName: "src/components/movies-list/movies-list.jsx",
-        lineNumber: 20,
+        lineNumber: 22,
         columnNumber: 23
     }, this);
-    return filteredMovies.map((m)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-            md: 3,
-            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                movie: m
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: [
+            filteredMovies.map((m)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                    md: 3,
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                        movieData: m,
+                        onMovieClick: (movie)=>{
+                            this.setSelectedMovie(movie);
+                        }
+                    }, void 0, false, {
+                        fileName: "src/components/movies-list/movies-list.jsx",
+                        lineNumber: 27,
+                        columnNumber: 9
+                    }, this)
+                }, m._id, false, {
+                    fileName: "src/components/movies-list/movies-list.jsx",
+                    lineNumber: 26,
+                    columnNumber: 7
+                }, this)),
+            ";",
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                movieData: selectedMovie,
+                setUser: (user)=>{
+                    this.setUser(user);
+                },
+                onBackClick: (newSelectedMovie)=>{
+                    this.setSelectedMovie(newSelectedMovie);
+                }
             }, void 0, false, {
                 fileName: "src/components/movies-list/movies-list.jsx",
-                lineNumber: 24,
-                columnNumber: 7
+                lineNumber: 30,
+                columnNumber: 5
             }, this)
-        }, m._id, false, {
-            fileName: "src/components/movies-list/movies-list.jsx",
-            lineNumber: 23,
-            columnNumber: 5
-        }, this));
+        ]
+    }, void 0, true);
 }
 _c = MoviesList;
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(MoviesList);
@@ -42992,28 +43017,7 @@ $RefreshReg$(_c, "MoviesList");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Col":"2L2I6","react-redux":"bdVon","../movie-card/movie-card":"bwuIu","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ"}],"lJZlQ":[function() {},{}],"lOjBx":[function(require,module,exports) {
-"use strict";
-var m = require("react-dom");
-var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-exports.createRoot = function(c, o) {
-    i.usingClientEntryPoint = true;
-    try {
-        return m.createRoot(c, o);
-    } finally{
-        i.usingClientEntryPoint = false;
-    }
-};
-exports.hydrateRoot = function(c, h, o) {
-    i.usingClientEntryPoint = true;
-    try {
-        return m.hydrateRoot(c, h, o);
-    } finally{
-        i.usingClientEntryPoint = false;
-    }
-};
-
-},{"react-dom":"j6uA9"}],"cDNB3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap/Col":"2L2I6","react-redux":"bdVon","../movie-card/movie-card":"bwuIu","@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iZvRJ","../movie-view/movie-view":"ggaUx"}],"lJZlQ":[function() {},{}],"cDNB3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "__DO_NOT_USE__ActionTypes", ()=>ActionTypes);
@@ -43574,22 +43578,7 @@ function _defineProperty(obj, key, value) {
 }
 exports.default = _defineProperty;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p"}],"fOPxo":[function(require,module,exports) {
-"use strict";
-var compose = require("redux").compose;
-exports.__esModule = true;
-exports.composeWithDevTools = typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : function() {
-    if (arguments.length === 0) return undefined;
-    if (typeof arguments[0] === "object") return compose;
-    return compose.apply(null, arguments);
-};
-exports.devToolsEnhancer = typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__ : function() {
-    return function(noop) {
-        return noop;
-    };
-};
-
-},{"redux":"cDNB3"}],"dgblV":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"lHL0p"}],"dgblV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _redux = require("redux");
@@ -43610,7 +43599,7 @@ function movies(state = [], action) {
             return state;
     }
 }
-// function moviesApp(state={}, action) {
+// function moviesApp(state = {}, action) {
 //   return {
 //     visibilityFilter: visibilityFilter(state.visibilityFilter, action),
 //     movies: movies(state.movies, action)

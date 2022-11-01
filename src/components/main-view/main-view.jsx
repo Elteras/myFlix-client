@@ -118,7 +118,7 @@ class MainView extends React.Component {
 
               if (movies.length === 0) return <div className="main-view"></div>;
 
-              return <MoviesList movies={movies} />    // new line. should it be below?
+              return <MoviesList movies={movies} selectedMovie={selectedMovie} setSelectedMovie={this.setSelectedMovie} />    // new line
 
               // {
               //   return <>
