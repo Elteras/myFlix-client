@@ -32,7 +32,6 @@ class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
       selectedMovie: null,
       user: JSON.parse(localStorage.getItem('user'))
     };
@@ -118,7 +117,7 @@ class MainView extends React.Component {
 
               if (movies.length === 0) return <div className="main-view"></div>;
 
-              return <MoviesList movies={movies} selectedMovie={selectedMovie} setSelectedMovie={this.setSelectedMovie} />    // new line
+              return <MoviesList movies={movies} setSelectedMovie={this.setSelectedMovie} />    // new line
 
               // {
               //   return <>
@@ -218,11 +217,10 @@ class MainView extends React.Component {
 }
 
 //exercise told me to put this *above* the yellow bracket just above but that broke the app so idfk.
+
 let mapStateToProps = state => {
   return { movies: state.movies }
 }
-
-
 
 export default connect(mapStateToProps, { setMovies })(MainView);
 

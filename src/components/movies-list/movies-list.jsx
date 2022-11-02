@@ -24,13 +24,13 @@ function MoviesList(props) {
   return <>
     {filteredMovies.map(m => (
       <Col md={3} key={m._id}>
-        <MovieCard movieData={m} onMovieClick={movie => { this.setSelectedMovie(movie) }} />
+        <MovieCard movieData={m} onMovieClick={movie => { setSelectedMovie(movie) }} />
       </Col>
     ))};
     <MovieView
       movieData={selectedMovie}
       setUser={(user) => { this.setUser(user) }}
-      onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+      onBackClick={newSelectedMovie => { setSelectedMovie(newSelectedMovie); }} />
   </>
 }
 
