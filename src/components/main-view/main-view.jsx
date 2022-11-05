@@ -5,6 +5,7 @@ import axios from 'axios';
 //3.8 react-redux stuff
 import { connect } from 'react-redux';
 import { setMovies } from '../../actions/actions'
+import { setSelectedMovie } from '../../actions/actions'
 import MoviesList from '../movies-list/movies-list'
 //---------------
 
@@ -69,10 +70,13 @@ class MainView extends React.Component {
   }
 
 
-  setSelectedMovie(newSelectedMovie) {
+  setSelectedMovie = (newSelectedMovie) => {
+    console.log(selectedMovie)
+    console.log(newSelectedMovie)
     this.setState({
       selectedMovie: newSelectedMovie
     });
+    console.log(selectedMovie)
   }
 
   setUser(user) {

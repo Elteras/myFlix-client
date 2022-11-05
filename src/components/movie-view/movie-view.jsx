@@ -126,7 +126,7 @@ MovieView.propTypes = {
       Bio: PropTypes.string.isRequired,
       Birth: PropTypes.string,
     }),
-  }).isRequired,
+  }),
   setUser: PropTypes.func.isRequired,
   onBackClick: PropTypes.func.isRequired
 };

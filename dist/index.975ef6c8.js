@@ -5725,25 +5725,25 @@ class MainView extends (0, _reactDefault.default).Component {
             user: null
         });
     }
-    setSelectedMovie(newSelectedMovie) {
+    setSelectedMovie = (newSelectedMovie)=>{
         this.setState({
             selectedMovie: newSelectedMovie
         });
-    }
+    };
     setUser(user) {
         this.setState({
             user: user
         });
         localStorage.setItem("user", JSON.stringify(user));
     }
-    //changed for 3.8. might need to check and change some other things to match. 
+    //changed for 3.8. might need to check and change some other things to match.
     getMovies(token) {
         (0, _axiosDefault.default).get("https://elt-myflix.herokuapp.com/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
-            this.props.setMovies(response.data); // this is the changed line. 
+            this.props.setMovies(response.data); // this is the changed line.
         }).catch(function(error) {
             console.log(error);
         });
@@ -5758,7 +5758,7 @@ class MainView extends (0, _reactDefault.default).Component {
                         user: user
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 107,
+                        lineNumber: 106,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -5804,7 +5804,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 110,
+                                lineNumber: 109,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -5819,7 +5819,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 140,
+                                lineNumber: 139,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -5852,7 +5852,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 151,
+                                lineNumber: 150,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -5882,7 +5882,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 171,
+                                lineNumber: 170,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -5912,19 +5912,19 @@ class MainView extends (0, _reactDefault.default).Component {
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 191,
+                                lineNumber: 190,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 109,
+                        lineNumber: 108,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 106,
+                lineNumber: 105,
                 columnNumber: 9
             }, this)
         }, void 0, false);
@@ -6119,6 +6119,7 @@ var _movieCardScss = require("./movie-card.scss");
 class MovieCard extends (0, _reactDefault.default).Component {
     render() {
         const { movieData , onMovieClick  } = this.props;
+        console.log("onMovieClick", onMovieClick);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default), {
             className: "movie-cards",
             children: [
@@ -10673,7 +10674,7 @@ MovieView.propTypes = {
             Bio: (0, _propTypesDefault.default).string.isRequired,
             Birth: (0, _propTypesDefault.default).string
         })
-    }).isRequired,
+    }),
     setUser: (0, _propTypesDefault.default).func.isRequired,
     onBackClick: (0, _propTypesDefault.default).func.isRequired
 };
@@ -41424,7 +41425,7 @@ Menubar.propTypes = {
         Username: (0, _propTypesDefault.default).string.isRequired,
         Password: (0, _propTypesDefault.default).string.isRequired,
         Email: (0, _propTypesDefault.default).string.isRequired
-    }).isRequired
+    })
 };
 var _c;
 $RefreshReg$(_c, "Menubar");
