@@ -4,8 +4,7 @@ import axios from 'axios';
 
 //3.8 react-redux stuff
 import { connect } from 'react-redux';
-import { setMovies } from '../../actions/actions'
-import { setSelectedMovie } from '../../actions/actions'
+import { setMovies, setUser } from '../../actions/actions'
 import MoviesList from '../movies-list/movies-list'
 //---------------
 
@@ -32,10 +31,10 @@ class MainView extends React.Component {
 
   constructor() {
     super();
-    this.state = {
-      selectedMovie: null,
-      user: JSON.parse(localStorage.getItem('user'))
-    };
+    // this.state = {
+    //   selectedMovie: null,
+    //   user: JSON.parse(localStorage.getItem('user'))
+    // };
   }
 
 
@@ -51,10 +50,11 @@ class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user
-    });
+    console.log('authData', authData);
+    let userData = {
+      ...authData.user
+    };
+    this.props.setUser(userData);
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', JSON.stringify(authData.user));
@@ -70,19 +70,19 @@ class MainView extends React.Component {
   }
 
 
-  setSelectedMovie = (newSelectedMovie) => {
-    console.log(selectedMovie)
-    console.log(newSelectedMovie)
-    this.setState({
-      selectedMovie: newSelectedMovie
-    });
-    console.log(selectedMovie)
-  }
+  // setSelectedMovie = (newSelectedMovie) => {
+  //   console.log(selectedMovie)
+  //   console.log(newSelectedMovie)
+  //   this.setState({
+  //     selectedMovie: newSelectedMovie
+  //   });
+  //   console.log(selectedMovie)
+  // }
 
-  setUser(user) {
-    this.setState({ user: user });
-    localStorage.setItem('user', JSON.stringify(user))
-  }
+  // setUser(user) {
+  //   this.setState({ user: user });
+  //   localStorage.setItem('user', JSON.stringify(user))
+  // }
 
 
   //changed for 3.8. might need to check and change some other things to match. 
@@ -101,8 +101,7 @@ class MainView extends React.Component {
 
 
   render() {
-    const { selectedMovie, user } = this.state;
-    const { movies } = this.props;
+    const { user, movies } = this.props;
 
     return (
       <>
@@ -121,7 +120,7 @@ class MainView extends React.Component {
 
               if (movies.length === 0) return <div className="main-view"></div>;
 
-              return <MoviesList movies={movies} setSelectedMovie={this.setSelectedMovie} />    // new line
+              return <MoviesList movies={movies} />    // new line
 
               // {
               //   return <>
@@ -223,8 +222,8 @@ class MainView extends React.Component {
 //exercise told me to put this *above* the yellow bracket just above but that broke the app so idfk.
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return { movies: state.movies, user: state.user }
 }
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
 

@@ -4,6 +4,8 @@ import { Nav, Navbar, Container, Button } from 'react-bootstrap';
 
 export function Menubar({ user }) {
 
+  console.log('user', user);
+
   const onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");
